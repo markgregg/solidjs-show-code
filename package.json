@@ -1,0 +1,21 @@
+{
+  "name": "solidjs-show-code",
+  "private": true,
+  "description": "Code viewer for solidJs",
+  "keywords": [],
+  "author": "Mark Gregg <gregg.mark@gmail.com> (https://github.com/markgregg)",
+  "workspaces": [
+    "examples/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "publish": "cd packages/solidjs-show-code && npm run build && npm publish",
+    "start-local": "cd examples/solidjs-show-code && npm run prepare && npm run start",
+    "start-live": "cd examples/solidjs-show-code && npm install solidjs-show-code@latest && npm run start",
+    "deploy": "cd examples/solidjs-show-code && npm run deploy",
+    "install": "cd packages/solidjs-show-code && npm install && cd ../../examples/solidjs-show-code && npm install"
+  },
+  "devDependencies": {
+    "prettier": "^2.5.1"
+  }
+}
