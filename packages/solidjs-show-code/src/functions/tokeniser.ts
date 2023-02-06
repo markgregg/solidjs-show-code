@@ -9,9 +9,7 @@ export const tokenise = (text: string): Token[] => {
 const readTokens = (text: string, cnt: number, tokens: Token[], endAt?: number): number => {
   while( cnt < text.length ) {
     const code = text.charCodeAt(cnt);
-    console.log(`cnt:${cnt}, code:${code}`)
     if( code === endAt) {
-      console.log(`found ${endAt}`);
       return cnt;
     }
     if( code == 32 ) {
@@ -87,16 +85,16 @@ const readString = (text: string, cnt: number, code: number, tokens: Token[]): n
 const readNumber = (text: string, cnt: number, tokens: Token[]): number => {
   const start = cnt;
   while( cnt < text.length ) {
-    const code = text.charCodeAt(cnt++);
+    const code = text.charCodeAt(++cnt);
     if( (code < 48 || code > 57) && code !== 45 && code !== 46 ) {
       break;
     }
   } 
   tokens.push( {
-    text: text.slice(start, cnt-1),
+    text: text.slice(start, cnt),
     type: 'Number'
   });
-  return cnt;
+  return cnt
 }
 
 const readKeyWord = (text: string, cnt: number, tokens: Token[]): number => {

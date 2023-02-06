@@ -17,6 +17,6 @@
   },
   "dependencies": {
     "solid-js": "^1.6.10",
-    "solidjs-show-code": "0.0.2"
+    "solidjs-show-code": "^0.1.0"
   }
 }

@@ -12,6 +12,11 @@ describe('Tokeniser', () => {
     console.log(tokens);
   });
 
+  test('numbers', () => {
+    const tokens = tokenise(`const objects = [{name:"test", value: 12},{name:"test", value: 45}]`);
+    console.log(tokens);
+  });
+
 
   test('tokenise code', () => {
     const tokens = tokenise(`import { Component, createSignal, JSX } from 'solid-js';

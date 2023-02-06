@@ -12,7 +12,7 @@ const CodeView: Component<CodeViewProperties> = (props: CodeViewProperties) => {
 
   const tokens = tokenise(props.code);
   return (
-    <div>
+    <div style={{padding: '10px'}}>
       {
         buildHtmlTree(tokens, props.styleSheet)
       }
