@@ -3,7 +3,7 @@ import { CodeStyleSheet } from "./codeStyleSheet";
 export const javaScriptDefault: CodeStyleSheet = {
   colorKeyWordMap: [
     {
-      color: 'blue',
+      color: '#26a2cb',
       types: ['KeyWord'],
       tokens: ['(', '}', '[', ']', '{', '}']
     },
@@ -25,7 +25,7 @@ export const javaScriptDefault: CodeStyleSheet = {
       tokens: ['<', '/', '>']
     },
     {
-      color: 'aquamarine',
+      color: '#1ec51b',
       tokens: ['string', 'number', 'bigint', 'boolean', 'undefined', 'null', 'object']
     }
   ]

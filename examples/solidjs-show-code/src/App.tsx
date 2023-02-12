@@ -1,60 +1,87 @@
-import { Component, createSignal, JSX } from 'solid-js';
-import CodeView, { javaScriptDefault } from "solidjs-show-code";
+import SolidJsSelect from "solidjs-select";
+import ShowCodeExample from './ShowCodeExample';
+import './App.css';
+import { applyTheme, themes, Themes } from './themes/themes';
+import { createSignal, onMount } from 'solid-js';
+
+const pages = ['Example', 'More Demos'];
 
 const App = () => {
+  const [themeName, setThemeName] = createSignal<string>(
+    Themes.Plain.toString()
+  );
+  const [page, setPage] = createSignal<string>('Example');
+
+  onMount(() => {
+    applyTheme(Themes.Plain);
+  });
+
+  const setTheme = (theme: string[]) => {
+    setThemeName(theme[0]);
+    applyTheme(theme[0]);
+  };
+
+  const openPage = (page: string) => {
+    if( page === 'More Demos') {
+      window.location.href = "https://markgregg.github.io/demo-home/"; 
+    } else {
+      setPage(page);
+    } 
+  }
 
   return (
-    <div style={{"background-color": "black", color: "white"}}>
-      <CodeView 
-        code={`
-        import { Component, createSignal } from 'solid-js';
-        import './VerticalMenu.css';
-        
-        interface VerticalMenuProps {
-          title: string;
-          options: string[];
-          onSelect: (option: string) => void;
-        }
-        
-        const VerticalMenu: Component<VerticalMenuProps> = ({
-          title,
-          options,
-          onSelect,
-        }) => {
-          const [active, setActive] = createSignal<string>(options[0]);
-          const [highlight, setHighlight] = createSignal<string>();
-        
-          return (
-            <div class="vmenu">
-              <h3 class="vmenu-heading">{title}</h3>
-              <ul class="vmenu-items">
-                {options.map((option) => (
-                  <li
-                    class="option"
-                    style={{
-                      'background-color':
-                        highlight() === option || option === active()
-                          ? 'var(--pageColor3)'
-                          : 'var(--pageColor1)',
-                    }}
-                    onMouseEnter={() => setHighlight(option)}
-                    onMouseLeave={() => setHighlight(undefined)}
-                    onClick={() => {
-                      setActive(option);
-                      onSelect(option);
-                    }}
-                  >
-                    <p class='vmenu-text'>{option}</p>
-                  </li>
-                ))}
-              </ul>
+    <div class="frame">
+      <div class="page">
+        <div class='header'>
+          <div class="heading">
+            <h1 class="title">SolidJs-Select</h1>
+            <p class="statement">
+              A compact, highly functional select control for SolidJs
+            </p>
+          </div>
+          <div class="menu-bar">
+            <div class="menu">
+              {pages.map((pg) => (
+                <div class="menu-item" onClick={() => openPage(pg)}>
+                  {
+                    ( pg === page()) 
+                    ? <u><p class="menu-text">{pg}</p></u>
+                    : <p class="menu-text">{pg}</p> 
+                  }
+                </div>
+              ))}
             </div>
-          );
-        };
-        
-        export default VerticalMenu;`}
-        styleSheet={javaScriptDefault}
-      />
+            <div class="theme">
+              <SolidJsSelect
+                maximumSelections={1}
+                minimumSelections={1}
+                selectType="dropdown"
+                title="themes"
+                choices={themes}
+                selected={themeName()}
+                onChange={setTheme}
+              />
+            </div>
+          </div>
+
+        </div>
+        <div class="body">
+          <div class="context">
+            {
+              (page() === 'Example' && <ShowCodeExample/>)
+            }
+          </div>
+          <div
+            class="footer"
+            style={{
+              'background-color': 'var(--pageColor2)',
+              color: 'var(--solidjsSelectFontColor)',
+            }}
+          >
+            <p class="no-padding">Created by Mark Gregg</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
