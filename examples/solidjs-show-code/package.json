@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "solid-js": "^1.6.10",
-    "solidjs-select": "^0.4.4",
+    "solidjs-select": "^0.7.7",
     "solidjs-show-code": "^0.1.4"
   }
 }
